@@ -1,7 +1,6 @@
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage, SystemMessage
-
-# from tools.langfuse import create_langfuse
+from tools.langfuse import create_langfuse
 
 
 class Agent:
@@ -26,7 +25,7 @@ class Agent:
         self.tools = tools
         self.llm_with_tools = self.llm.bind_tools(self.tools)
         self.runnable = runnable
-        # self.langfuse = create_langfuse(self.name)
+        self.langfuse = create_langfuse(self.name)
 
     def get_name(self):
         return self.name
@@ -47,5 +46,5 @@ class Agent:
                 SystemMessage(self.system_prompt),
                 HumanMessage(input),
             ],
-            # {"callbacks": [self.langfuse]},
+            {"callbacks": [self.langfuse]},
         )
