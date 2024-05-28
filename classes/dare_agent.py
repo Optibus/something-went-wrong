@@ -29,11 +29,8 @@ class DareAgent(Agent):
             system_prompt = (
                 f"Your vision is {self.vision}\n"
                 f"Your mission is {self.mission}\n{context}\n"
-                f"Remember that before you answer the question, you must check to see if it complies with your vision and mission above\n"
-                f"Question: {input}"
+                f"Remember that before you answer the question, you must check to see if it complies with your vision and mission above"
             )
-            print("WISAM")
-            print(system_prompt)
             res = self.runnable.invoke(
                 [
                     SystemMessage(system_prompt),
