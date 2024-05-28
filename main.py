@@ -108,12 +108,12 @@ def ping():
 def invoke():
     data = request.json
     input = data["input"]
-    # res = agent.invoke(input=input, context="")
+    context = get_context_from_db(input)
     res = classification_agent.invoke(
         input=(
             "Here is the context for the task:\n"
             "<context>\n"
-            f"{build_context()}\n"
+            f"{context}\n"
             "</context>\n"
             "Here is the error message to classify:'n"
             "<input>\n"

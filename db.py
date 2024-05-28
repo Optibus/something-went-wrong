@@ -61,5 +61,5 @@ def load_data():
 def get_context_from_db(query):
     vectorstore = get_vectorstore()
     res = vectorstore.similarity_search(query, k=1)
-    res_str = ', '.join(f"{key}: {value}" for key, value in res[0].metadata.items())
+    res_str = '\n '.join(f"<{key.lower()}>{value}</{key.lower()}>" for key, value in res[0].metadata.items())
     return res_str
