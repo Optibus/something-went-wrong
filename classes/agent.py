@@ -37,7 +37,8 @@ class Agent:
         return self.tools
 
     def export_graph(self, file_path: str):
-        self.runnable.get_graph().draw_png(file_path)
+        pass
+        # self.runnable.get_graph().draw_png(file_path)
 
     def invoke(self, input: str):
         return self.runnable.invoke(

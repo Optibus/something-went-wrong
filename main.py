@@ -109,21 +109,21 @@ if __name__ == "__main__":
         llm_haiku,
         "You are an expert in migrating code from python2 to python3. You will be given a code snippet to migrate.\nalways try to migrate the code even though it's already in python3",
     )
-    python_agent.export_graph("code-agent.png")
+    # python_agent.export_graph("code-agent.png")
 
     code_analyzer_agent = BasicAgent(
         "Agent - Python Code Analyzer",
         llm_haiku,
         "You are an expert in analyzing migrated python2 code to python3 and founding all the possible edge cases that might occur.\nalways try to analyze the code and try to figure out what the inner functions might be doing and what issues can be there.\nExample of issues that might occur: exception message: '>' not supported between instances of 'NoneType' and 'int' in python2 this might work but in python3 it will throw an exception.",
     )
-    code_analyzer_agent.export_graph("code-analyzer-agent.png")
+    # code_analyzer_agent.export_graph("code-analyzer-agent.png")
 
     test_generator_agent = BasicAgent(
         "Agent - Python Unit Test Generator",
         llm_haiku,
         "You are an expert in generating unit tests for the migrated python3 code.\nalways try to generate the unit tests for the provided code.",
     )
-    test_generator_agent.export_graph("test-generator-agent.png")
+    # test_generator_agent.export_graph("test-generator-agent.png")
 
     # members = ["Code Analyzer", "Python2 to Python3 Converter", "Code Updater"]
     agents = {}
@@ -160,7 +160,7 @@ if __name__ == "__main__":
     # agents["END"] = END
 
     supervisor_agent = SuperVisorAgent("Agent - Supervisor", llm_haiku, agents)
-    supervisor_agent.export_graph("supervisor-agent.png")
+    # supervisor_agent.export_graph("supervisor-agent.png")
 
     res = supervisor_agent.invoke(content)
 
