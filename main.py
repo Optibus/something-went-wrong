@@ -33,34 +33,15 @@ from langchain.agents.format_scratchpad.openai_functions import (
 
 from langchain_core.outputs import ChatGeneration, Generation
 
-from langchain.agents.agent import AgentOutputParser
 from langchain_core.runnables import Runnable, RunnablePassthrough
 
-from classes.basic_prompt_agent import BasicAgent
-from classes.python_converter_agent import Python2To3Converter
-from classes.supervisor_agent import SuperVisorAgent
+from classes.dare_agent import DareAgent
 
 
 load_dotenv()
 
 # Anthropic
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
-
-# Github
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-GITHUB_OWNER = os.getenv("GITHUB_OWNER")
-GITHUB_REPO = os.getenv("GITHUB_REPO")
-
-# Langfure
-LANGFUSE_SECRET_KEY = os.getenv("LANGFUSE_SECRET_KEY")
-LANGFUSE_PUBLIC_KEY = os.getenv("LANGFUSE_PUBLIC_KEY")
-LANGFUSE_HOST = os.getenv("LANGFUSE_HOST")
-
-langfuse_handler = None
-llm = None
-llm_with_tools = None
-runnable = None
-graph = MessageGraph()
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
@@ -73,6 +54,7 @@ if __name__ == "__main__":
         model="claude-3-opus-20240229",
         max_tokens=4096,
     )
+
     llm_haiku = ChatAnthropic(
         anthropic_api_key=ANTHROPIC_API_KEY,
         temperature=0,
@@ -80,13 +62,18 @@ if __name__ == "__main__":
         max_tokens=4096,
     )
 
-    agent = BasicAgent(
-        "Agent - Output Agent",
-        llm_haiku,
-        ("Hello\n"),
+    agent = DareAgent(
+        name="Agent - Output Agent",
+        llm=llm_haiku,
+        vision="To provide accurate and helpful information to the user, while ensuring that the information is relevant to the user's query",
+        mission="To provide a solution to the user's problem",
     )
 
-    res = agent.invoke("Hello")
+    print("I AM HERE HERE")
+    res = agent.invoke(
+        input="What is the error",
+        context="Something went wrong when importing the module",
+    )
 
     print("FINAL FINAL OUTPUT")
     print("====================================")
