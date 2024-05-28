@@ -9,6 +9,7 @@ from requests.auth import HTTPBasicAuth
 from classes.dare_agent import DareAgent
 from bs4 import BeautifulSoup
 
+from db import get_context_from_db
 
 load_dotenv()
 
@@ -49,7 +50,8 @@ def ping():
 def invoke():
     data = request.json
     input = data["input"]
-    res = agent.invoke(input=input, context="")
+    context = get_context_from_db(input)
+    res = agent.invoke(input=input, context=context)
     return res
 
 
