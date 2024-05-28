@@ -91,3 +91,4 @@ wcwidth==0.2.13
 Werkzeug==3.0.2
 wrapt==1.16.0
 yarl==1.9.4
+beautifulsoup4~=4.12.3
