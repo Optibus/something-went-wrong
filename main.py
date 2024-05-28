@@ -45,8 +45,6 @@ def ping():
 @app.route("/invoke", methods=["POST"])
 def invoke():
     data = request.json
-    print("DATA")
-    print(data)
     input = data["input"]
     res = agent.invoke(input=input, context="")
     return res
