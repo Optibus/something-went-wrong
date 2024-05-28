@@ -1,3 +1,4 @@
+import json
 from flask import Flask, request
 from flask_cors import CORS
 import os
@@ -96,10 +97,13 @@ def dataset():
             row = [cell.text.strip() for cell in cells]
             rows.append(row)
 
-    # Convert to dictionary
-    table_dict = []
+    # Convert to list of dictionaries
+    table_objects = []
     for row in rows:
         row_dict = {headers[idx]: cell for idx, cell in enumerate(row)}
-        table_dict.append(row_dict)
+        table_objects.append(row_dict)
 
-    return table_dict
+    with open("./resources/data.json", "w") as json_file:
+        json.dump(table_objects, json_file, indent=4)
+
+    return table_objects
