@@ -36,7 +36,7 @@ class DareAgent(Agent):
                     SystemMessage(system_prompt),
                     HumanMessage(input),
                 ],
-                {"callbacks": [self.langfuse]},
+                # {"callbacks": [self.langfuse]},
             )
             return res[-1].content
         except Exception as e:
