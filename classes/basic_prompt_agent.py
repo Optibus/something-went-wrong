@@ -33,4 +33,5 @@ class BasicAgent(Agent):
             )
             return res[-1].content
         except Exception as e:
+            print(e)
             return "Something went wrong. Please try again."
